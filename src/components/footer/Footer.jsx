@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
         <div>
-            <h1>Hello, Next.js!</h1>
+            footer
 
         </div>
     );
