@@ -1,8 +1,29 @@
 import Image from "next/image"
 import styles from "./singlePost.module.css"
 
-function SinglePostPage({ params }) {
-    console.log('params ', params)
+
+const getData = async ({ slug }) => {
+    const url = `https://jsonplaceholder.typicode.com/posts/${slug}`;
+    console.log("Fetching data from:", url);
+
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        console.error("Error response:", res);
+        throw new Error("Something went wrong");
+    }
+
+    return res.json();
+};
+
+
+
+const SinglePostPage = async ({ params }) => {
+    // console.log('params ', params)
+
+    const { slug } = params
+
+    const post = await getData({ slug })
     return (
         <div className={styles.container}>
             <div className={styles.imgContainer}>
@@ -14,7 +35,7 @@ function SinglePostPage({ params }) {
             </div>
 
             <div className={styles.textContainer}>
-                <h1 className={styles.title}>Title</h1>
+                <div className={styles.title}>{post.body}</div>
                 <div className={styles.detail}>
                     <Image
                         className={styles.avatar}
@@ -31,7 +52,7 @@ function SinglePostPage({ params }) {
                         <div className={styles.detailValue}>12345</div>
                     </div>
                 </div>
-                <div className={styles.content}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa deleniti fuga aliquam vel laudantium. Reprehenderit laborum, unde reiciendis quia quo neque quos voluptatibus, nihil impedit veritatis sunt quaerat ab odio!</div>
+                <div className={styles.content}>{post.body}</div>
             </div>
         </div>
     )
