@@ -2,7 +2,8 @@
 import PostCard from "@/components/postCard/postCard"
 import styles from "./blog.module.css"
 
-function BlogPage() {
+function BlogPage(params) {
+    console.log('params ', params)
     return (
         <div className={styles.container}>
             <div className={styles.post}>
