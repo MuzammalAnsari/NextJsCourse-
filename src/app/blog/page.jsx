@@ -17,12 +17,25 @@ import { getPosts } from "@/lib/data"
 //     return res.json();
 // };
 
+// FETCH DATA WITH AN API
+const getData = async (slug) => {
+    const res = `http://localhost:3000/api/blog/${slug}`;
+    const url = await fetch(res);
+
+    if (!url.ok) {
+        throw new Error("Something went wrong");
+    }
+
+    return url.json();
+};
+
+
 
 const BlogPage = async () => {
     // console.log('params ', params)
-    // const posts = await getData()
+    const posts = await getData()
 
-    const posts = await getPosts()
+    // const posts = await getPosts()
     return (
         <div className={styles.container}>
             {posts.map((post) => (
